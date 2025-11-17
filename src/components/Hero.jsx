@@ -1,32 +1,37 @@
-import Spline from '@splinetool/react-spline';
 import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-      <div className="absolute inset-0">
-        <Spline scene="https://prod.spline.design/ESO6PnMadasO0hU3/scene.splinecode" style={{ width: '100%', height: '100%' }} />
+    <section className="relative min-h-[80vh] flex items-center">
+      {/* Minimal background accents */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-gradient-to-br from-slate-200 to-white blur-3xl opacity-70" />
+        <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-gradient-to-tr from-slate-100 to-white blur-3xl opacity-70" />
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/30 to-white/80 pointer-events-none" />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-4 w-full pt-28">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 w-full pt-24">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="backdrop-blur-xl bg-white/50 rounded-2xl border border-white/60 shadow-xl p-8 md:p-12"
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          className="max-w-3xl"
         >
-          <p className="text-sm uppercase tracking-[0.2em] text-slate-700/80 mb-3">Designer • Engineer • Writer</p>
-          <h1 className="text-4xl md:text-6xl font-bold text-slate-900 leading-tight">
-            Creating delightful digital experiences
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-xs text-slate-600 backdrop-blur">
+            <span className="h-1.5 w-1.5 rounded-full bg-slate-900" />
+            Currently exploring minimal, mindful interfaces
+          </div>
+
+          <h1 className="mt-6 text-4xl md:text-6xl font-semibold leading-tight tracking-[-0.02em] text-slate-900">
+            Quietly bold digital products
           </h1>
-          <p className="mt-4 text-slate-700 text-lg max-w-2xl">
-            I blend design, code, and storytelling to craft modern websites and products with soul. Explore my work, visual experiments, and long-form notes.
+
+          <p className="mt-5 text-slate-600 text-lg md:text-xl max-w-2xl">
+            I design and build elegant, purposeful experiences with a focus on clarity, calm motion, and craftsmanship.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a href="#projects" className="px-5 py-2.5 rounded-full bg-slate-900 text-white shadow hover:-translate-y-0.5 transition-transform">See Projects</a>
-            <a href="#gallery" className="px-5 py-2.5 rounded-full bg-white/70 border border-white text-slate-900 hover:bg-white">Open Gallery</a>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href="#projects" className="px-5 py-2.5 rounded-full bg-slate-900 text-white hover:bg-slate-800 transition-colors">View work</a>
+            <a href="#gallery" className="px-5 py-2.5 rounded-full border border-slate-300 text-slate-900 hover:bg-slate-50 transition-colors">Gallery</a>
           </div>
         </motion.div>
       </div>
