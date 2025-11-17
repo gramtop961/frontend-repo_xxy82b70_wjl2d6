@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
   return (
@@ -30,8 +31,8 @@ export default function Hero() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="#projects" className="px-5 py-2.5 rounded-full bg-slate-900 text-white hover:bg-slate-800 transition-colors">View work</a>
-            <a href="#gallery" className="px-5 py-2.5 rounded-full border border-slate-300 text-slate-900 hover:bg-slate-50 transition-colors">Gallery</a>
+            <Link to="/projects" className="px-5 py-2.5 rounded-full bg-slate-900 text-white hover:bg-slate-800 transition-colors">View work</Link>
+            <Link to="/gallery" className="px-5 py-2.5 rounded-full border border-slate-300 text-slate-900 hover:bg-slate-50 transition-colors">Gallery</Link>
           </div>
         </motion.div>
       </div>

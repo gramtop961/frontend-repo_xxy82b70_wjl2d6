@@ -1,46 +1,34 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const posts = [
-  {
-    title: 'Designing for Delight: Micro-interactions',
-    excerpt: 'How tiny animations can transform the way users feel your product.',
-    date: 'Oct 8, 2025'
-  },
-  {
-    title: 'From Idea to MVP in a Weekend',
-    excerpt: 'A practical approach to validating concepts with minimal code.',
-    date: 'Sep 30, 2025'
-  },
-  {
-    title: 'What I Learned Building 3D Interfaces',
-    excerpt: 'Takeaways from experimenting with Spline and Three.js.',
-    date: 'Sep 12, 2025'
-  }
+  { id: 'calm-motion', title: 'Designing for Calm Motion', excerpt: 'Thoughts on using subtle animation to guide attention without distraction.' },
+  { id: 'craftsmanship', title: 'Craftsmanship in Everyday UI', excerpt: 'Small details that make interfaces feel cared for and trustworthy.' },
+  { id: 'systems', title: 'Building Systems, Not Pages', excerpt: 'How to think in tokens, components, and patterns.' },
 ];
 
 export default function Blog() {
   return (
-    <section id="blog" className="relative py-20 bg-gradient-to-b from-slate-50 to-white">
+    <section id="blog" className="py-20">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-end justify-between mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Latest notes</h2>
-          <a href="#" className="text-slate-700 hover:text-slate-900">Read the blog</a>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Latest Notes</h2>
+          <Link to="/blog" className="text-slate-700 hover:text-slate-900">View all</Link>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
-          {posts.map((p, i) => (
-            <motion.article
-              key={p.title}
+          {posts.map((post, i) => (
+            <motion.div
+              key={post.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="relative rounded-2xl border border-white bg-white/70 backdrop-blur-xl p-6 shadow-lg hover:shadow-xl"
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              className="rounded-2xl border border-slate-200 bg-white/70 backdrop-blur p-6 shadow-sm hover:shadow-md transition-shadow"
             >
-              <p className="text-xs uppercase tracking-widest text-slate-500">{p.date}</p>
-              <h3 className="mt-2 text-xl font-semibold text-slate-900">{p.title}</h3>
-              <p className="mt-2 text-slate-700">{p.excerpt}</p>
-              <a href="#" className="mt-4 inline-block text-slate-900 font-medium">Read more →</a>
-            </motion.article>
+              <h3 className="text-xl font-semibold text-slate-900">{post.title}</h3>
+              <p className="mt-2 text-slate-600">{post.excerpt}</p>
+              <Link to={`/blog/${post.id}`} className="mt-4 inline-block text-slate-900 hover:underline">Read more →</Link>
+            </motion.div>
           ))}
         </div>
       </div>

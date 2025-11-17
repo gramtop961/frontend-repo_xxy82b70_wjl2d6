@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -13,18 +13,31 @@ const images = [
 
 export default function Gallery() {
   const [index, setIndex] = useState(0);
-  const visible = 3; // items visible at once (responsive tweak below)
+  const [hovered, setHovered] = useState(false);
+  const intervalRef = useRef(null);
+
+  const visible = 3; // items visible at once
 
   const slides = useMemo(() => {
-    // duplicate edges for smooth wrap
     return [...images, ...images, ...images];
   }, []);
 
-  const base = images.length; // center block start
+  const base = images.length;
   const current = base + index;
 
   const prev = () => setIndex((i) => (i - 1 + images.length) % images.length);
   const next = () => setIndex((i) => (i + 1) % images.length);
+
+  // Autoplay with pause on hover
+  useEffect(() => {
+    if (hovered) return;
+    intervalRef.current = setInterval(() => {
+      setIndex((i) => (i + 1) % images.length);
+    }, 3500);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [hovered]);
 
   return (
     <section id="gallery" className="relative py-20">
@@ -34,7 +47,7 @@ export default function Gallery() {
           <div className="text-slate-600">Carousel view</div>
         </div>
 
-        <div className="relative">
+        <div className="relative" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
           {/* Controls */}
           <button
             aria-label="Previous"
@@ -58,7 +71,7 @@ export default function Gallery() {
               initial={false}
               animate={{ x: `calc((-100% / ${slides.length}) * ${current - 1})` }}
               transition={{ type: 'spring', stiffness: 120, damping: 20 }}
-              style={{ width: `${(slides.length) * (100 / visible)}%` }}
+              style={{ width: `${slides.length * (100 / visible)}%` }}
             >
               {slides.map((src, i) => (
                 <div key={`${src}-${i}`} className="basis-1/3 shrink-0">
